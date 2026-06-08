@@ -91,7 +91,11 @@ export default function LatestRelease() {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="latest-release-thumb-link"
-              className="group relative block w-full aspect-[4/3] md:aspect-video lg:aspect-[16/11] overflow-hidden bg-[#080808] border border-white/5 shadow-2xl transition-all duration-700 hover:border-white/20"
+              className="group relative block w-full aspect-[4/3] md:aspect-video lg:aspect-[16/11] overflow-hidden bg-[#080808] transition-all duration-700 hover:scale-[1.02]"
+              style={{
+                WebkitMaskImage: 'radial-gradient(ellipse at center, black 60%, transparent 100%)',
+                maskImage: 'radial-gradient(ellipse at center, black 60%, transparent 100%)'
+              }}
               aria-label={`Watch ${latest.title}`}
             >
               <img
@@ -113,9 +117,9 @@ export default function LatestRelease() {
               </div>
 
               {/* Status Pill */}
-              <div className="absolute top-6 left-6 px-5 py-2.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center gap-3">
+              <div className="absolute top-[15%] left-[10%] px-4 py-2 rounded-full bg-black/60 backdrop-blur-xl flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-[0_0_8px_white]" />
-                <span className="font-heading text-[9px] tracking-[0.3em] uppercase text-white/90">
+                <span className="font-heading text-[8px] tracking-[0.3em] uppercase text-white/90">
                   Now Playing
                 </span>
               </div>
