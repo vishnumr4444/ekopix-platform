@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   const [toast, setToast] = useState(null);
   const [newVideo, setNewVideo] = useState({ youtubeId: '', title: '', subtitle: '' });
   const [editingVideo, setEditingVideo] = useState(null);
-  const [newTrack, setNewTrack] = useState({ title: '', filename: '', start: 0, end: 30, desc: '', tags: '' });
+  const [newTrack, setNewTrack] = useState({ title: '', filename: '', start: 0, end: 30, desc: '', tags: '', spotify: '', itunes: '', youtube: '' });
   const [editingTrack, setEditingTrack] = useState(null);
   const [heroForm, setHeroForm] = useState(null);
   const [latestForm, setLatestForm] = useState(null);
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
   // ── Track CRUD ──
   const addTrack = async (e) => {
     e.preventDefault();
-    if (!newTrack.title || !newTrack.filename) return showToast('Title and filename required', 'error');
+    if (!newTrack.title) return showToast('Title required', 'error');
     try {
       const r = await fetch(apiUrl('/tracks'), { 
         method: 'POST', 
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
         }) 
       });
       if (r.ok) { 
-        setNewTrack({ title: '', filename: '', start: 0, end: 30, desc: '', tags: '' }); 
+        setNewTrack({ title: '', filename: '', start: 0, end: 30, desc: '', tags: '', spotify: '', itunes: '', youtube: '' }); 
         showToast('Composer track added!'); 
         fetchAll(); 
       }
@@ -248,9 +248,12 @@ export default function AdminDashboard() {
                 <h2 className="font-heading text-xs tracking-[0.3em] uppercase text-white mb-5">Add Composer Song</h2>
                 <form onSubmit={addTrack} className="grid sm:grid-cols-2 gap-4">
                   <Input label="Song Title" value={newTrack.title} onChange={e => setNewTrack(p => ({ ...p, title: e.target.value }))} placeholder="e.g. Neon Horizon" />
-                  <Input label="Filename in public/songs" value={newTrack.filename} onChange={e => setNewTrack(p => ({ ...p, filename: e.target.value }))} placeholder="e.g. 1.wav" />
+                  <Input label="Filename in public/songs (Optional)" value={newTrack.filename} onChange={e => setNewTrack(p => ({ ...p, filename: e.target.value }))} placeholder="e.g. 1.wav" />
                   <Input label="Loop Start (Seconds)" type="number" value={newTrack.start} onChange={e => setNewTrack(p => ({ ...p, start: e.target.value }))} placeholder="e.g. 15" />
                   <Input label="Loop End (Seconds)" type="number" value={newTrack.end} onChange={e => setNewTrack(p => ({ ...p, end: e.target.value }))} placeholder="e.g. 45" />
+                  <Input label="Spotify Link" value={newTrack.spotify} onChange={e => setNewTrack(p => ({ ...p, spotify: e.target.value }))} placeholder="https://open.spotify.com/..." />
+                  <Input label="Apple Music / iTunes Link" value={newTrack.itunes} onChange={e => setNewTrack(p => ({ ...p, itunes: e.target.value }))} placeholder="https://music.apple.com/..." />
+                  <Input label="YouTube Link" value={newTrack.youtube} onChange={e => setNewTrack(p => ({ ...p, youtube: e.target.value }))} placeholder="https://youtube.com/watch?v=..." />
                   <div className="sm:col-span-2">
                     <Input label="Tags (comma-separated)" value={newTrack.tags} onChange={e => setNewTrack(p => ({ ...p, tags: e.target.value }))} placeholder="e.g. Synthwave, Cyberpunk" />
                   </div>
@@ -264,65 +267,80 @@ export default function AdminDashboard() {
               </div>
 
               {/* Tracks List */}
-              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
-                <div className="px-6 py-4 border-b border-white/10">
-                  <h2 className="font-heading text-xs tracking-[0.3em] uppercase text-white">Composer Library ({tracks.length} songs)</h2>
-                </div>
-                {tracks.length === 0 ? (
-                  <div className="px-6 py-12 text-center font-body text-sm text-[#9b9bb1]">No songs yet. Add one above.</div>
-                ) : (
-                  <div className="divide-y divide-white/5">
-                    {tracks.map((t, idx) => (
-                      <div key={t.id} className="px-6 py-5">
-                        {editingTrack?.id === t.id ? (
-                          <div className="space-y-4">
-                            <div className="grid sm:grid-cols-2 gap-4">
-                              <Input label="Song Title" value={editingTrack.title} onChange={e => setEditingTrack(p => ({ ...p, title: e.target.value }))} />
-                              <Input label="Filename" value={editingTrack.filename} onChange={e => setEditingTrack(p => ({ ...p, filename: e.target.value }))} />
-                              <Input label="Loop Start" type="number" value={editingTrack.start} onChange={e => setEditingTrack(p => ({ ...p, start: e.target.value }))} />
-                              <Input label="Loop End" type="number" value={editingTrack.end} onChange={e => setEditingTrack(p => ({ ...p, end: e.target.value }))} />
-                              <div className="sm:col-span-2">
-                                <Input label="Tags (comma-separated)" value={Array.isArray(editingTrack.tags) ? editingTrack.tags.join(', ') : editingTrack.tags} onChange={e => setEditingTrack(p => ({ ...p, tags: e.target.value }))} />
-                              </div>
-                              <div className="sm:col-span-2">
-                                <Textarea label="Description" value={editingTrack.desc} onChange={e => setEditingTrack(p => ({ ...p, desc: e.target.value }))} />
-                              </div>
-                            </div>
-                            <div className="flex gap-2">
-                              <Btn onClick={saveEditTrack}><Save size={13} />Save</Btn>
-                              <Btn onClick={() => setEditingTrack(null)} variant="outline"><X size={13} />Cancel</Btn>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex items-start gap-4 justify-between">
-                            <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#cccccc] shrink-0 font-heading text-xs">
-                              {idx + 1}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <h3 className="font-display font-bold text-white text-base tracking-wide">{t.title}</h3>
-                                <div className="flex gap-1">
-                                  {(Array.isArray(t.tags) ? t.tags : []).map(tg => (
-                                    <span key={tg} className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/5 font-heading text-[8px] tracking-[0.1em] text-[#9b9bb1]">{tg}</span>
-                                  ))}
+              <div className="space-y-6">
+                {[
+                  { title: 'Original Songs', data: tracks.filter(t => !t.tags?.includes('Cover')) },
+                  { title: 'Cover Songs', data: tracks.filter(t => t.tags?.includes('Cover')) }
+                ].map((section, sectionIdx) => (
+                  <div key={section.title} className="rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden">
+                    <div className="px-6 py-4 border-b border-white/10">
+                      <h2 className="font-heading text-xs tracking-[0.3em] uppercase text-white">{section.title} ({section.data.length} songs)</h2>
+                    </div>
+                    {section.data.length === 0 ? (
+                      <div className="px-6 py-12 text-center font-body text-sm text-[#9b9bb1]">No {section.title.toLowerCase()} yet.</div>
+                    ) : (
+                      <div className="divide-y divide-white/5">
+                        {section.data.map((t, idx) => (
+                          <div key={t.id} className="px-6 py-5">
+                            {editingTrack?.id === t.id ? (
+                              <div className="space-y-4">
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                  <Input label="Song Title" value={editingTrack.title} onChange={e => setEditingTrack(p => ({ ...p, title: e.target.value }))} />
+                                  <Input label="Filename (Optional)" value={editingTrack.filename} onChange={e => setEditingTrack(p => ({ ...p, filename: e.target.value }))} />
+                                  <Input label="Loop Start" type="number" value={editingTrack.start} onChange={e => setEditingTrack(p => ({ ...p, start: e.target.value }))} />
+                                  <Input label="Loop End" type="number" value={editingTrack.end} onChange={e => setEditingTrack(p => ({ ...p, end: e.target.value }))} />
+                                  <Input label="Spotify Link" value={editingTrack.spotify} onChange={e => setEditingTrack(p => ({ ...p, spotify: e.target.value }))} />
+                                  <Input label="Apple Music Link" value={editingTrack.itunes} onChange={e => setEditingTrack(p => ({ ...p, itunes: e.target.value }))} />
+                                  <Input label="YouTube Link" value={editingTrack.youtube} onChange={e => setEditingTrack(p => ({ ...p, youtube: e.target.value }))} />
+                                  <div className="sm:col-span-2">
+                                    <Input label="Tags (comma-separated)" value={Array.isArray(editingTrack.tags) ? editingTrack.tags.join(', ') : editingTrack.tags} onChange={e => setEditingTrack(p => ({ ...p, tags: e.target.value }))} />
+                                  </div>
+                                  <div className="sm:col-span-2">
+                                    <Textarea label="Description" value={editingTrack.desc} onChange={e => setEditingTrack(p => ({ ...p, desc: e.target.value }))} />
+                                  </div>
+                                </div>
+                                <div className="flex gap-2">
+                                  <Btn onClick={saveEditTrack}><Save size={13} />Save</Btn>
+                                  <Btn onClick={() => setEditingTrack(null)} variant="outline"><X size={13} />Cancel</Btn>
                                 </div>
                               </div>
-                              <p className="font-body text-xs text-[#9b9bb1] mt-1 leading-relaxed">{t.desc}</p>
-                              <div className="flex gap-4 mt-2 font-heading text-[9px] tracking-wider text-white/50 uppercase">
-                                <span>File: <span className="text-[#cccccc]">{t.filename}</span></span>
-                                <span>Loop: <span className="text-[#888888]">{t.start}s - {t.end}s</span></span>
+                            ) : (
+                              <div className="flex items-start gap-4 justify-between">
+                                <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#cccccc] shrink-0 font-heading text-xs">
+                                  {idx + 1}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <h3 className="font-display font-bold text-white text-base tracking-wide">{t.title}</h3>
+                                    <div className="flex gap-1">
+                                      {(Array.isArray(t.tags) ? t.tags : []).map(tg => (
+                                        <span key={tg} className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/5 font-heading text-[8px] tracking-[0.1em] text-[#9b9bb1]">{tg}</span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <p className="font-body text-xs text-[#9b9bb1] mt-1 leading-relaxed">{t.desc}</p>
+                                  <div className="flex gap-4 mt-2 font-heading text-[9px] tracking-wider text-white/50 uppercase">
+                                    <span>File: <span className="text-[#cccccc]">{t.filename || 'None'}</span></span>
+                                    <span>Loop: <span className="text-[#888888]">{t.start}s - {t.end}s</span></span>
+                                  </div>
+                                  <div className="flex gap-3 mt-2 font-heading text-[9px] tracking-wider text-white/40 uppercase">
+                                    {t.spotify && <span>✓ Spotify</span>}
+                                    {t.itunes && <span>✓ Apple</span>}
+                                    {t.youtube && <span>✓ YouTube</span>}
+                                  </div>
+                                </div>
+                                <div className="flex gap-2 shrink-0 self-center">
+                                  <Btn onClick={() => setEditingTrack(t)} variant="outline"><Edit2 size={13} />Edit</Btn>
+                                  <Btn onClick={() => deleteTrack(t.id)} variant="danger"><Trash2 size={13} />Delete</Btn>
+                                </div>
                               </div>
-                            </div>
-                            <div className="flex gap-2 shrink-0 self-center">
-                              <Btn onClick={() => setEditingTrack(t)} variant="outline"><Edit2 size={13} />Edit</Btn>
-                              <Btn onClick={() => deleteTrack(t.id)} variant="danger"><Trash2 size={13} />Delete</Btn>
-                            </div>
+                            )}
                           </div>
-                        )}
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
+                ))}
               </div>
             </>
           )}

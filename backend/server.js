@@ -36,18 +36,24 @@ const memDb = {
 
   // Composer track catalog
   tracks: [
-    { id: '1', title: "Shattered Wings", filename: "1.wav", start: 30, end: 48, desc: "A sweeping symphonic metal theme with dramatic violin crescendos and dual-guitar drives.", tags: ["Orchestral", "Symphonic Metal"], order: 0 },
-    { id: '2', title: "Neon Horizon", filename: "2.wav", start: 45, end: 60, desc: "High-octane synthwave theme driving the cyberpunk racing universe log.", tags: ["Synthwave", "Cyberpunk"], order: 1 },
-    { id: '3', title: "Ripples of Water", filename: "3.mp3", start: 15, end: 32, desc: "Water Goddess character theme, ambient piano structures meeting harp resonance.", tags: ["Ambient", "Piano Instrumental"], order: 2 },
-    { id: '4', title: "Fallen Sky", filename: "4.mp3", start: 55, end: 72, desc: "Heavy modern guitar riffs colliding with deep visualizer synthesizer drops.", tags: ["Cyber-Rock", "Industrial"], order: 3 },
-    { id: '5', title: "Lost Resonance", filename: "5.wav", start: 20, end: 38, desc: "Ethereal vocal chop melodies floating over dynamic electro-ambient arrangements.", tags: ["Future Bass", "Melodic"], order: 4 },
-    { id: '6', title: "Stardust Pulse", filename: "6.wav", start: 40, end: 58, desc: "Uplifting space-themed EDM log with sparkling lead drop synths.", tags: ["EDM", "Uplifting Space"], order: 5 },
-    { id: '7', title: "Crimson Eclipse", filename: "7.wav", start: 35, end: 53, desc: "Aggressive industrial electro theme representing timeline fractures.", tags: ["Industrial Electro", "Dark"], order: 6 },
-    { id: '8', title: "Memory Fragment", filename: "8.wav", start: 10, end: 28, desc: "Nostalgic acoustic arrangements paired with sweeping symphonic string ensembles.", tags: ["Acoustic", "Chamber Strings"], order: 7 },
-    { id: '9', title: "Glitch Dream", filename: "9.mp3", start: 25, end: 42, desc: "Experimental modular synth structures with complex digital glitch beats.", tags: ["Glitch Hop", "Experimental"], order: 8 },
-    { id: '10', title: "Final Convergence", filename: "10.mp3", start: 60, end: 80, desc: "The grand orchestration log combining full electronic band and full orchestra.", tags: ["Symphonic Rock", "Grand Finale"], order: 9 },
-    { id: '11', title: "Echoes of Eternity", filename: "11.mp3", start: 20, end: 40, desc: "An orchestrally led cinematic ballad detailing timeline roots.", tags: ["Orchestral", "Epic Ballad"], order: 10 },
-    { id: '12', title: "Cybernetic Soul", filename: "12.mp3", start: 5, end: 25, desc: "A pulsing techno/synth soundtrack symbolizing computer systems.", tags: ["Techno", "Cyberpunk"], order: 11 },
+    { id: 'o1', title: "Say My Name", filename: "Orginal/1_Say My Name.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/0b42VTJ8rYijNqDht0oJEB?si=bec3e0ce2f944e65", itunes: "https://music.apple.com/in/song/say-my-name-feat-sreelakshmi/6766093066", youtube: "https://www.youtube.com/watch?v=srKEjrgrXrw", order: 0 },
+    { id: 'o2', title: "I Am The Ocean", filename: "Orginal/2_I Am the Ocean.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/6fIedpIm7KVgFtOTnAjcXP?si=14d66385d6254714", itunes: "https://music.apple.com/in/song/i-am-the-ocean/6766093070", youtube: "https://www.youtube.com/watch?v=joxhlRPMXlU", order: 1 },
+    { id: 'o3', title: "How This Ends", filename: "Orginal/3_How This Ends.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2RNN6uO4o28qoc2GoFQxEz?si=286b5ed7092a4d60", itunes: "https://music.apple.com/in/song/how-this-ends/6766093071", youtube: "https://www.youtube.com/watch?v=0v_6McF3a9E&list=PLWFjC6DjDNJjNKLLXScxMngy8ZC0q2T9c&index=4", order: 2 },
+    { id: 'o4', title: "I Am Not Afraid", filename: "Orginal/4_I Am Not Afraid.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2tSpQvZuZ1Z0kmXq9HPnDh?si=a14c4966ef4942f9", itunes: "https://music.apple.com/in/song/i-am-not-afraid/6766093069", youtube: "https://www.youtube.com/watch?v=HxGAwUUY7m8", order: 3 },
+    { id: 'o5', title: "Paralyzed", filename: "Orginal/5_Paralyzed.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/5ZgDKShwtVO9JfWv88z3dE?si=ecc5382d5180481e", itunes: "https://music.apple.com/in/song/paralyzed/1872977110", youtube: "https://youtu.be/1SGwxKpdk3U?si=NuKLttMmm1Rzb6KZ", order: 4 },
+    { id: 'o6', title: "Paralyzed (Unplugged)", filename: "Orginal/6_Paralyzed (Unplugged).wav", start: 0, end: 15, desc: "Acoustic arrangement.", tags: ["Acoustic"], spotify: "https://open.spotify.com/track/6qwGLay2G8SACwzfLdPWoi?si=ff06f114c3c24e2d", itunes: "https://music.apple.com/in/song/paralyzed-feat-kickvicky-unplugged-version/1882039234", youtube: "https://youtu.be/FC3NyZkHkRc?si=NGvrgX6clnf94JvX", order: 5 },
+    { id: 'o7', title: "One Day", filename: "Orginal/7_One Day.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/4iTmGcovXnIAMOEuCAV08t?si=7c7c54ea5c9242a3", itunes: "https://music.apple.com/in/song/one-day/1840647342", youtube: "https://youtu.be/Wk4hEVnOISk?si=HJHMFXiGNdp8hopw", order: 6 },
+    { id: 'o8', title: "Tera Bina", filename: "Orginal/8_Tera Bina.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Hindi"], spotify: "https://open.spotify.com/track/4vUpxx1dmCJnPEQl8Re0Hy?si=28abaa2850364f95", itunes: "https://music.apple.com/in/album/tera-bina-jeena-kya-hai-single/1872858774", youtube: "https://youtu.be/-CBOrb98-54?si=xRdbcu1kGt6UAYEx", order: 7 },
+    { id: 'o9', title: "Love", filename: "Orginal/9_Love.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o9", itunes: "https://music.apple.com/us/album/placeholder-o9", youtube: "https://youtu.be/HI5m4Mce4Bw?si=ge6KmIngXpELZLad", order: 8 },
+    { id: 'o10', title: "Thank You God For a Merry Christmas", filename: "Orginal/10_Thank You God for a Merry Christmas.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Christmas"], spotify: "https://open.spotify.com/track/2l9oLjGwzg2zlm87WSeqHa?si=3784c7365cef4684", itunes: "https://music.apple.com/in/song/thank-you-god-for-a-merry-christmas/1865371376", youtube: "https://youtu.be/Mh1QY_MjVk4?si=XnLe_gEEtEbfkASD", order: 9 },
+    { id: 'o11', title: "Still Tied To you", filename: "Orginal/11_Still Tied To You.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/5nUBHSkOTMzmIOusZ3peQz?si=dddb8810a308442b", itunes: "https://music.apple.com/in/song/still-tied-to-you/1882298083", youtube: "https://youtu.be/_ed3xQ5OVmA?si=DyEsniZLkpLvHoRR", order: 10 },
+    { id: 'o12', title: "All Yours Now", filename: "Orginal/12_All Yours Now.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o12", itunes: "https://music.apple.com/us/album/placeholder-o12", youtube: "https://www.youtube.com/watch?v=A1kxobj6O7w", order: 11 },
+    { id: 'o13', title: "From The Very Begining", filename: "Orginal/13_Beginning.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2F8woIT5IVNzXzErDYI0TI?si=b3348ae6a8ef4146", itunes: "https://music.apple.com/in/song/from-the-very-beginning/1890238383", youtube: "https://youtube.com/watch?v=placeholder-o13", order: 12 },
+    { id: 'o14', title: "Am I Stronger", filename: "Orginal/14_Stronger.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/3Q8hCnGyfJPM8MLN69MVV9?si=2ecddd413318479b", itunes: "https://music.apple.com/in/song/am-i-stronger/1890328814", youtube: "https://youtube.com/watch?v=placeholder-o14", order: 13 },
+    { id: 'c1', title: "We Wish You Merry Christmas", filename: "Cover/1_we wish u.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/7EdtPzVNW5FyprO1Ji3aSv?si=a1746c80df374627", itunes: "https://music.apple.com/in/song/we-wish-you-a-merry-christmas/1865371378", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH", order: 14 },
+    { id: 'c2', title: "God Rest Ye Merry", filename: "Cover/2_God Rest Ye Merry.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4FIYOv63FiiWk3df0Vcams?si=26a1b71ec3754de8", itunes: "https://music.apple.com/in/song/god-rest-ye-merry/1865371379", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH", order: 15 },
+    { id: 'c3', title: "Carol Of The Bells", filename: "Cover/3_carol of the bells cimeroli Pentatonix.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4psVZb7wkNkhgVZjo7UqCc?si=cb6c6129bd774d5d", itunes: "https://music.apple.com/in/song/carol-of-the-bells/1865371381", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH", order: 16 },
+    { id: 'c4', title: "Silent Night", filename: "Cover/4_Silent night.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/6LnP5irqR7Cz1yFaEYTEWT?si=022255d26c8e4146", itunes: "https://music.apple.com/in/song/silent-night-holy-night/1865371383", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH", order: 17 },
   ],
 
   // Site settings
@@ -118,6 +124,9 @@ async function connectDB() {
       end: { type: Number, default: 30 },
       desc: String,
       tags: [String],
+      spotify: String,
+      itunes: String,
+      youtube: String,
       order: { type: Number, default: 0 },
     });
     TrackModel = mongoose.model('Track', trackSchema);
@@ -249,8 +258,8 @@ app.get('/api/tracks', async (req, res) => {
 
 app.post('/api/tracks', auth, async (req, res) => {
   try {
-    const { title, filename, start, end, desc, tags } = req.body;
-    if (!title || !filename) return res.status(400).json({ message: 'title and filename required.' });
+    const { title, filename, start, end, desc, tags, spotify, itunes, youtube } = req.body;
+    if (!title) return res.status(400).json({ message: 'title required.' });
     const tagList = Array.isArray(tags) ? tags : (tags ? String(tags).split(',').map(s => s.trim()) : []);
     
     if (useInMemory) {
@@ -262,6 +271,9 @@ app.post('/api/tracks', auth, async (req, res) => {
         end: Number(end) || 30, 
         desc: desc || '', 
         tags: tagList,
+        spotify: spotify || '',
+        itunes: itunes || '',
+        youtube: youtube || '',
         order: memDb.tracks.length 
       };
       memDb.tracks.push(t);
@@ -276,6 +288,9 @@ app.post('/api/tracks', auth, async (req, res) => {
       end: Number(end) || 30, 
       desc: desc || '', 
       tags: tagList,
+      spotify: spotify || '',
+      itunes: itunes || '',
+      youtube: youtube || '',
       order: count 
     });
     await t.save();
@@ -285,7 +300,7 @@ app.post('/api/tracks', auth, async (req, res) => {
 
 app.put('/api/tracks/:id', auth, async (req, res) => {
   try {
-    const { title, filename, start, end, desc, tags, order } = req.body;
+    const { title, filename, start, end, desc, tags, spotify, itunes, youtube, order } = req.body;
     const tagList = Array.isArray(tags) ? tags : (tags ? String(tags).split(',').map(s => s.trim()) : []);
     
     if (useInMemory) {
@@ -299,13 +314,16 @@ app.put('/api/tracks/:id', auth, async (req, res) => {
         end: end !== undefined ? Number(end) : memDb.tracks[idx].end, 
         desc: desc !== undefined ? desc : memDb.tracks[idx].desc, 
         tags: tags !== undefined ? tagList : memDb.tracks[idx].tags,
+        spotify: spotify !== undefined ? spotify : memDb.tracks[idx].spotify,
+        itunes: itunes !== undefined ? itunes : memDb.tracks[idx].itunes,
+        youtube: youtube !== undefined ? youtube : memDb.tracks[idx].youtube,
         order: order !== undefined ? Number(order) : memDb.tracks[idx].order 
       };
       return res.json(memDb.tracks[idx]);
     }
     const t = await TrackModel.findOneAndUpdate(
       { id: req.params.id }, 
-      { title, filename, start, end, desc, tags: tagList, order }, 
+      { title, filename, start, end, desc, tags: tagList, spotify, itunes, youtube, order }, 
       { new: true }
     );
     if (!t) return res.status(404).json({ message: 'Not found.' });

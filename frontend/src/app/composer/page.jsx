@@ -62,18 +62,18 @@ const ORIGINAL_SONGS = [
   { id: 'o6', title: "Paralyzed (Unplugged)", filename: "Orginal/6_Paralyzed (Unplugged).wav", start: 0, end: 15, desc: "Acoustic arrangement.", tags: ["Acoustic"], spotify: "https://open.spotify.com/track/6qwGLay2G8SACwzfLdPWoi?si=ff06f114c3c24e2d", itunes: "https://music.apple.com/in/song/paralyzed-feat-kickvicky-unplugged-version/1882039234", youtube: "https://youtu.be/FC3NyZkHkRc?si=NGvrgX6clnf94JvX" },
   { id: 'o7', title: "One Day", filename: "Orginal/7_One Day.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/4iTmGcovXnIAMOEuCAV08t?si=7c7c54ea5c9242a3", itunes: "https://music.apple.com/in/song/one-day/1840647342", youtube: "https://youtu.be/Wk4hEVnOISk?si=HJHMFXiGNdp8hopw" },
   { id: 'o8', title: "Tera Bina", filename: "Orginal/8_Tera Bina.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Hindi"], spotify: "https://open.spotify.com/track/4vUpxx1dmCJnPEQl8Re0Hy?si=28abaa2850364f95", itunes: "https://music.apple.com/in/album/tera-bina-jeena-kya-hai-single/1872858774", youtube: "https://youtu.be/-CBOrb98-54?si=xRdbcu1kGt6UAYEx" },
-  { id: 'o9', title: "Love", filename: "Orginal/9_Love.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o9", itunes: "https://music.apple.com/us/album/placeholder-o9", youtube: "https://youtu.be/HI5m4Mce4Bw?si=ge6KmIngXpELZLad" },
-  { id: 'o10', title: "Thank You God For a Merry Christmas", filename: "Orginal/10_Thank You God for a Merry Christmas.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Christmas"], spotify: "https://open.spotify.com/track/2l9oLjGwzg2zlm87WSeqHa?si=3784c7365cef4684", itunes: "https://music.apple.com/in/song/thank-you-god-for-a-merry-christmas/1865371376", youtube: "https://youtu.be/Mh1QY_MjVk4?si=XnLe_gEEtEbfkASD" },
+  { id: 'o9', title: "Love", filename: "Orginal/9_Love.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o9", itunes: "https://music.apple.com/us/album/placeholder-o9", youtube: "https://youtu.be/HI5m4Mce4Bw?si=ge6KmIngXpELZLad" },
+  { id: 'o10', title: "Thank You God For a Merry Christmas", filename: "Orginal/10_Thank You God for a Merry Christmas.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Christmas"], spotify: "https://open.spotify.com/track/2l9oLjGwzg2zlm87WSeqHa?si=3784c7365cef4684", itunes: "https://music.apple.com/in/song/thank-you-god-for-a-merry-christmas/1865371376", youtube: "https://youtu.be/Mh1QY_MjVk4?si=XnLe_gEEtEbfkASD" },
   { id: 'o11', title: "Still Tied To you", filename: "Orginal/11_Still Tied To You.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/5nUBHSkOTMzmIOusZ3peQz?si=dddb8810a308442b", itunes: "https://music.apple.com/in/song/still-tied-to-you/1882298083", youtube: "https://youtu.be/_ed3xQ5OVmA?si=DyEsniZLkpLvHoRR" },
   { id: 'o12', title: "All Yours Now", filename: "Orginal/12_All Yours Now.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o12", itunes: "https://music.apple.com/us/album/placeholder-o12", youtube: "https://www.youtube.com/watch?v=A1kxobj6O7w" },
   { id: 'o13', title: "From The Very Begining", filename: "Orginal/13_Beginning.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2F8woIT5IVNzXzErDYI0TI?si=b3348ae6a8ef4146", itunes: "https://music.apple.com/in/song/from-the-very-beginning/1890238383", youtube: "https://youtube.com/watch?v=placeholder-o13" },
   { id: 'o14', title: "Am I Stronger", filename: "Orginal/14_Stronger.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/3Q8hCnGyfJPM8MLN69MVV9?si=2ecddd413318479b", itunes: "https://music.apple.com/in/song/am-i-stronger/1890328814", youtube: "https://youtube.com/watch?v=placeholder-o14" },
 ];
 const COVER_SONGS = [
-  { id: 'c1', title: "We Wish You Merry Christmas", filename: "Cover/1_we wish u.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/7EdtPzVNW5FyprO1Ji3aSv?si=a1746c80df374627", itunes: "https://music.apple.com/in/song/we-wish-you-a-merry-christmas/1865371378", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
-  { id: 'c2', title: "God Rest Ye Merry", filename: "Cover/2_God Rest Ye Merry.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4FIYOv63FiiWk3df0Vcams?si=26a1b71ec3754de8", itunes: "https://music.apple.com/in/song/god-rest-ye-merry/1865371379", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
-  { id: 'c3', title: "Carol Of The Bells", filename: "Cover/3_carol of the bells cimeroli Pentatonix.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4psVZb7wkNkhgVZjo7UqCc?si=cb6c6129bd774d5d", itunes: "https://music.apple.com/in/song/carol-of-the-bells/1865371381", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
-  { id: 'c4', title: "Silent Night", filename: "Cover/4_Silent night.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/6LnP5irqR7Cz1yFaEYTEWT?si=022255d26c8e4146", itunes: "https://music.apple.com/in/song/silent-night-holy-night/1865371383", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c1', title: "We Wish You Merry Christmas", filename: "Cover/1_we wish u.mp3", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/7EdtPzVNW5FyprO1Ji3aSv?si=a1746c80df374627", itunes: "https://music.apple.com/in/song/we-wish-you-a-merry-christmas/1865371378", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c2', title: "God Rest Ye Merry", filename: "Cover/2_God Rest Ye Merry.mp3", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4FIYOv63FiiWk3df0Vcams?si=26a1b71ec3754de8", itunes: "https://music.apple.com/in/song/god-rest-ye-merry/1865371379", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c3', title: "Carol Of The Bells", filename: "Cover/3_carol of the bells cimeroli Pentatonix.mp3", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4psVZb7wkNkhgVZjo7UqCc?si=cb6c6129bd774d5d", itunes: "https://music.apple.com/in/song/carol-of-the-bells/1865371381", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c4', title: "Silent Night", filename: "Cover/4_Silent night.mp3", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/6LnP5irqR7Cz1yFaEYTEWT?si=022255d26c8e4146", itunes: "https://music.apple.com/in/song/silent-night-holy-night/1865371383", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
 ];
 
 export default function ComposerPage() {
@@ -83,6 +83,10 @@ export default function ComposerPage() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
+  
+  const [originalSongs, setOriginalSongs] = useState([]);
+  const [coverSongs, setCoverSongs] = useState([]);
+  const [loadingTracks, setLoadingTracks] = useState(true);
   
   const audioRef = useRef(null);
   const intervalRef = useRef(null);
@@ -133,8 +137,8 @@ export default function ComposerPage() {
             stopPreview();
           }
         }, 100);
-      }).catch((err) => {
-        console.warn("Hover play blocked by browser:", err);
+      }).catch(() => {
+        // Silently ignore browser playback interruptions
       });
     }
   };
@@ -172,13 +176,30 @@ export default function ComposerPage() {
             stopAudio();
           }
         }, 100);
-      }).catch((err) => {
-        console.warn("Audio play blocked or file missing:", err);
+      }).catch(() => {
+        // Silently ignore browser playback interruptions
+        setIsPlaying(false);
       });
     }
   };
 
   useEffect(() => {
+    fetch('/api/tracks')
+      .then(r => r.json())
+      .then(data => {
+        const originals = data.filter(t => !t.tags.includes('Cover'));
+        const covers = data.filter(t => t.tags.includes('Cover'));
+        setOriginalSongs(originals.length > 0 ? originals : ORIGINAL_SONGS);
+        setCoverSongs(covers.length > 0 ? covers : COVER_SONGS);
+        setLoadingTracks(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch tracks:", err);
+        setOriginalSongs(ORIGINAL_SONGS);
+        setCoverSongs(COVER_SONGS);
+        setLoadingTracks(false);
+      });
+
     return () => {
       stopAudio();
       stopPreview();
@@ -338,8 +359,16 @@ export default function ComposerPage() {
 
         {/* Track Lists Sections (2 Columns) */}
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 pb-20 grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {renderTrackList(ORIGINAL_SONGS, "Original Songs", "EKOPIX Originals")}
-          {renderTrackList(COVER_SONGS, "Cover Songs", "Reimagined Classics")}
+          {loadingTracks ? (
+            <div className="col-span-2 py-24 flex items-center justify-center">
+              <div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin" />
+            </div>
+          ) : (
+            <>
+              {renderTrackList(originalSongs, "Original Songs", "EKOPIX Originals")}
+              {renderTrackList(coverSongs, "Cover Songs", "Reimagined Classics")}
+            </>
+          )}
         </div>
 
         {/* Minimal Sticky Audio Player */}
