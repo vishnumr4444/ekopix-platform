@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   { id: 'videos',   label: 'Videos',   href: '/#videos' },
   { id: 'about',    label: 'About',    href: '/#about' },
-  { id: 'composer', label: 'Composer', href: '/composer', isRoute: true },
+  { id: 'composer', label: 'Songs', href: '/composer', isRoute: true },
   { id: 'contact',  label: 'Contact',  href: '/#contact' },
 ];
 
@@ -54,6 +54,7 @@ export default function Nav() {
               src="/images/logo.png"
               alt="EKOPIX mark"
               fill
+              sizes="80px"
               className="object-contain"
               priority
             />

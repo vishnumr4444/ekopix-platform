@@ -4,54 +4,90 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Volume2, Play, Pause, Disc } from 'lucide-react';
 
+const SpotifyIcon = ({ className, size = 20 }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    width={size} 
+    height={size} 
+    fill="currentColor" 
+    className={className}
+  >
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.136-.668.47-.744 3.856-.88 7.15-.506 9.822 1.13.295.178.387.563.205.859zm1.224-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.076-1.183-.413.125-.85-.107-.975-.52-.125-.413.107-.85.52-.975 3.66-1.11 8.225-.563 11.346 1.353.367.226.488.707.26 1.074zm.106-2.833c-3.26-1.937-8.644-2.12-11.76-1.173-.5.152-1.025-.133-1.177-.633-.15-.5.133-1.025.633-1.177 3.616-1.097 9.56-.887 13.313 1.34.45.267.6.845.333 1.295-.267.45-.845.6-1.295.333z"/>
+  </svg>
+);
+
+const ITunesIcon = ({ className, size = 20 }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    width={size}
+    height={size}
+    fill="currentColor"
+    className={className}
+  >
+    <circle cx="256" cy="256" r="240" />
+    <path
+      fill="#fff"
+      d="M352 128v180.8c0 28.3-23 51.2-51.2 51.2s-51.2-22.9-51.2-51.2 22.9-51.2 51.2-51.2c10.6 0 20.4 3.2 28.8 8.7V184l-89.6 19.2v131.6c0 28.3-23 51.2-51.2 51.2s-51.2-22.9-51.2-51.2 22.9-51.2 51.2-51.2c10.6 0 20.4 3.2 28.8 8.7V167.8c0-13.7 9.7-25.6 23.1-28.5L352 128z"
+    />
+  </svg>
+);
+
+const YoutubeIcon = ({ className, size = 20 }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    width={size} 
+    height={size} 
+    fill="currentColor" 
+    className={className}
+  >
+    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
+
 const composerInfo = {
   name: "EKOPIX",
   role: "Lead Composer & Arranger",
-  bio: "The acoustic architect behind EKOPIX. It blends symphonic orchestrations, heavy modern synthesizer layers, and driving rock melodies to define the soundscapes of the universe. Explore the selected works below."
+  bio: "The acoustic architect behind EKOPIX. Exploring emotions through symphonic orchestrations, heavy modern synthesizer layers, and driving rock melodies. Dive into the sonic universe below."
 };
 
-const DEFAULT_TRACKS = [
-  { id: '1', title: "Shattered Wings", filename: "1.wav", start: 30, end: 48, desc: "A sweeping symphonic metal theme with dramatic violin crescendos and dual-guitar drives.", tags: ["Orchestral", "Symphonic Metal"] },
-  { id: '2', title: "Neon Horizon", filename: "2.wav", start: 45, end: 60, desc: "High-octane synthwave theme driving the cyberpunk racing universe log.", tags: ["Synthwave", "Cyberpunk"] },
-  { id: '3', title: "Ripples of Water", filename: "3.mp3", start: 15, end: 32, desc: "Water Goddess character theme, ambient piano structures meeting harp resonance.", tags: ["Ambient", "Piano Instrumental"] },
-  { id: '4', title: "Fallen Sky", filename: "4.mp3", start: 55, end: 72, desc: "Heavy modern guitar riffs colliding with deep visualizer synthesizer drops.", tags: ["Cyber-Rock", "Industrial"] },
-  { id: '5', title: "Lost Resonance", filename: "5.wav", start: 20, end: 38, desc: "Ethereal vocal chop melodies floating over dynamic electro-ambient arrangements.", tags: ["Future Bass", "Melodic"] },
-  { id: '6', title: "Stardust Pulse", filename: "6.wav", start: 40, end: 58, desc: "Uplifting space-themed EDM log with sparkling lead drop synths.", tags: ["EDM", "Uplifting Space"] },
-  { id: '7', title: "Crimson Eclipse", filename: "7.wav", start: 35, end: 53, desc: "Aggressive industrial electro theme representing timeline fractures.", tags: ["Industrial Electro", "Dark"] },
-  { id: '8', title: "Memory Fragment", filename: "8.mp3", start: 10, end: 28, desc: "Nostalgic acoustic arrangements paired with sweeping symphonic string ensembles.", tags: ["Acoustic", "Chamber Strings"] },
-  { id: '9', title: "Glitch Dream", filename: "9.mp3", start: 25, end: 42, desc: "Experimental modular synth structures with complex digital glitch beats.", tags: ["Glitch Hop", "Experimental"] },
-  { id: '10', title: "Final Convergence", filename: "10.mp3", start: 60, end: 80, desc: "The grand orchestration log combining full electronic band and full orchestra.", tags: ["Symphonic Rock", "Grand Finale"] },
-  { id: '11', title: "Echoes of Eternity", filename: "11.mp3", start: 20, end: 40, desc: "An orchestrally led cinematic ballad detailing timeline roots.", tags: ["Orchestral", "Epic Ballad"] },
-  { id: '12', title: "Cybernetic Soul", filename: "12.mp3", start: 5, end: 25, desc: "A pulsing techno/synth soundtrack symbolizing computer systems.", tags: ["Techno", "Cyberpunk"] }
+const ORIGINAL_SONGS = [
+  { id: 'o1', title: "Say My Name", filename: "Orginal/1_Say My Name.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/0b42VTJ8rYijNqDht0oJEB?si=bec3e0ce2f944e65", itunes: "https://music.apple.com/in/song/say-my-name-feat-sreelakshmi/6766093066", youtube: "https://www.youtube.com/watch?v=srKEjrgrXrw" },
+  { id: 'o2', title: "I Am The Ocean", filename: "Orginal/2_I Am the Ocean.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/6fIedpIm7KVgFtOTnAjcXP?si=14d66385d6254714", itunes: "https://music.apple.com/in/song/i-am-the-ocean/6766093070", youtube: "https://www.youtube.com/watch?v=joxhlRPMXlU" },
+  { id: 'o3', title: "How This Ends", filename: "Orginal/3_How This Ends.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2RNN6uO4o28qoc2GoFQxEz?si=286b5ed7092a4d60", itunes: "https://music.apple.com/in/song/how-this-ends/6766093071", youtube: "https://www.youtube.com/watch?v=0v_6McF3a9E&list=PLWFjC6DjDNJjNKLLXScxMngy8ZC0q2T9c&index=4" },
+  { id: 'o4', title: "I Am Not Afraid", filename: "Orginal/4_I Am Not Afraid.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2tSpQvZuZ1Z0kmXq9HPnDh?si=a14c4966ef4942f9", itunes: "https://music.apple.com/in/song/i-am-not-afraid/6766093069", youtube: "https://www.youtube.com/watch?v=HxGAwUUY7m8" },
+  { id: 'o5', title: "Paralyzed", filename: "Orginal/5_Paralyzed.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/5ZgDKShwtVO9JfWv88z3dE?si=ecc5382d5180481e", itunes: "https://music.apple.com/in/song/paralyzed/1872977110", youtube: "https://youtu.be/1SGwxKpdk3U?si=NuKLttMmm1Rzb6KZ" },
+  { id: 'o6', title: "Paralyzed (Unplugged)", filename: "Orginal/6_Paralyzed (Unplugged).wav", start: 0, end: 15, desc: "Acoustic arrangement.", tags: ["Acoustic"], spotify: "https://open.spotify.com/track/6qwGLay2G8SACwzfLdPWoi?si=ff06f114c3c24e2d", itunes: "https://music.apple.com/in/song/paralyzed-feat-kickvicky-unplugged-version/1882039234", youtube: "https://youtu.be/FC3NyZkHkRc?si=NGvrgX6clnf94JvX" },
+  { id: 'o7', title: "One Day", filename: "Orginal/7_One Day.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/4iTmGcovXnIAMOEuCAV08t?si=7c7c54ea5c9242a3", itunes: "https://music.apple.com/in/song/one-day/1840647342", youtube: "https://youtu.be/Wk4hEVnOISk?si=HJHMFXiGNdp8hopw" },
+  { id: 'o8', title: "Tera Bina", filename: "Orginal/8_Tera Bina.mp3", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Hindi"], spotify: "https://open.spotify.com/track/4vUpxx1dmCJnPEQl8Re0Hy?si=28abaa2850364f95", itunes: "https://music.apple.com/in/album/tera-bina-jeena-kya-hai-single/1872858774", youtube: "https://youtu.be/-CBOrb98-54?si=xRdbcu1kGt6UAYEx" },
+  { id: 'o9', title: "Love", filename: "Orginal/9_Love.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o9", itunes: "https://music.apple.com/us/album/placeholder-o9", youtube: "https://youtu.be/HI5m4Mce4Bw?si=ge6KmIngXpELZLad" },
+  { id: 'o10', title: "Thank You God For a Merry Christmas", filename: "Orginal/10_Thank You God for a Merry Christmas.aif", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Christmas"], spotify: "https://open.spotify.com/track/2l9oLjGwzg2zlm87WSeqHa?si=3784c7365cef4684", itunes: "https://music.apple.com/in/song/thank-you-god-for-a-merry-christmas/1865371376", youtube: "https://youtu.be/Mh1QY_MjVk4?si=XnLe_gEEtEbfkASD" },
+  { id: 'o11', title: "Still Tied To you", filename: "Orginal/11_Still Tied To You.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/5nUBHSkOTMzmIOusZ3peQz?si=dddb8810a308442b", itunes: "https://music.apple.com/in/song/still-tied-to-you/1882298083", youtube: "https://youtu.be/_ed3xQ5OVmA?si=DyEsniZLkpLvHoRR" },
+  { id: 'o12', title: "All Yours Now", filename: "Orginal/12_All Yours Now.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/placeholder-o12", itunes: "https://music.apple.com/us/album/placeholder-o12", youtube: "https://www.youtube.com/watch?v=A1kxobj6O7w" },
+  { id: 'o13', title: "From The Very Begining", filename: "Orginal/13_Beginning.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/2F8woIT5IVNzXzErDYI0TI?si=b3348ae6a8ef4146", itunes: "https://music.apple.com/in/song/from-the-very-beginning/1890238383", youtube: "https://youtube.com/watch?v=placeholder-o13" },
+  { id: 'o14', title: "Am I Stronger", filename: "Orginal/14_Stronger.wav", start: 0, end: 15, desc: "Original EKOPIX composition.", tags: ["Original"], spotify: "https://open.spotify.com/track/3Q8hCnGyfJPM8MLN69MVV9?si=2ecddd413318479b", itunes: "https://music.apple.com/in/song/am-i-stronger/1890328814", youtube: "https://youtube.com/watch?v=placeholder-o14" },
+];
+const COVER_SONGS = [
+  { id: 'c1', title: "We Wish You Merry Christmas", filename: "Cover/1_we wish u.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/7EdtPzVNW5FyprO1Ji3aSv?si=a1746c80df374627", itunes: "https://music.apple.com/in/song/we-wish-you-a-merry-christmas/1865371378", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c2', title: "God Rest Ye Merry", filename: "Cover/2_God Rest Ye Merry.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4FIYOv63FiiWk3df0Vcams?si=26a1b71ec3754de8", itunes: "https://music.apple.com/in/song/god-rest-ye-merry/1865371379", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c3', title: "Carol Of The Bells", filename: "Cover/3_carol of the bells cimeroli Pentatonix.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/4psVZb7wkNkhgVZjo7UqCc?si=cb6c6129bd774d5d", itunes: "https://music.apple.com/in/song/carol-of-the-bells/1865371381", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
+  { id: 'c4', title: "Silent Night", filename: "Cover/4_Silent night.aif", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/6LnP5irqR7Cz1yFaEYTEWT?si=022255d26c8e4146", itunes: "https://music.apple.com/in/song/silent-night-holy-night/1865371383", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
 ];
 
 export default function ComposerPage() {
-  const [tracks, setTracks] = useState(DEFAULT_TRACKS);
-  const [activeIdx, setActiveIdx] = useState(null);
-  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [activeTrack, setActiveTrack] = useState(null);
+  const [hoveredTrackId, setHoveredTrackId] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(0.7);
+  
   const audioRef = useRef(null);
   const intervalRef = useRef(null);
   const hoverAudioRef = useRef(null);
   const hoverIntervalRef = useRef(null);
-
-  useEffect(() => {
-    fetch('/api/tracks')
-      .then((res) => {
-        if (res.ok) return res.json();
-        throw new Error('Failed to load');
-      })
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setTracks(data);
-        }
-      })
-      .catch((err) => {
-        console.warn("Using fallback composer tracks:", err);
-      });
-  }, []);
 
   const stopAudio = () => {
     if (audioRef.current) {
@@ -77,34 +113,34 @@ export default function ComposerPage() {
     }
   };
 
-  const playPreview = (track, idx) => {
-    if (isPlaying) return; // Don't interrupt full playback
+  const playPreview = (track) => {
+    if (isPlaying) return;
 
     stopPreview();
 
     const audioPath = `/songs/${track.filename}`;
     const audio = new Audio(audioPath);
     hoverAudioRef.current = audio;
-    audio.volume = 0.4; // Slightly quieter for preview
+    audio.volume = 0.4;
     audio.currentTime = track.start || 0;
 
-    audio.play()
-      .then(() => {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
         hoverIntervalRef.current = setInterval(() => {
           if (!hoverAudioRef.current) return;
-          
           if (hoverAudioRef.current.currentTime >= (track.end || track.start + 15)) {
             stopPreview();
           }
         }, 100);
-      })
-      .catch((err) => {
-        // Browsers might block autoplay on hover, we catch silently
+      }).catch((err) => {
+        console.warn("Hover play blocked by browser:", err);
       });
+    }
   };
 
-  const playFull = (track, idx) => {
-    if (activeIdx === idx && isPlaying) {
+  const playFull = (track) => {
+    if (activeTrack?.id === track.id && isPlaying) {
       stopAudio();
       return;
     }
@@ -115,31 +151,31 @@ export default function ComposerPage() {
     const audioPath = `/songs/${track.filename}`;
     const audio = new Audio(audioPath);
     audioRef.current = audio;
-    audio.volume = 0.7;
+    audio.volume = volume;
     audio.currentTime = 0;
 
     audio.addEventListener('loadedmetadata', () => {
       setDuration(audio.duration);
     });
 
-    audio.play()
-      .then(() => {
-        setActiveIdx(idx);
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        setActiveTrack(track);
         setIsPlaying(true);
         setCurrentTime(0);
 
         intervalRef.current = setInterval(() => {
           if (!audioRef.current) return;
           setCurrentTime(audioRef.current.currentTime);
-
           if (audioRef.current.ended) {
             stopAudio();
           }
         }, 100);
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.warn("Audio play blocked or file missing:", err);
       });
+    }
   };
 
   useEffect(() => {
@@ -149,7 +185,117 @@ export default function ComposerPage() {
     };
   }, []);
 
-  const activeTrack = activeIdx !== null ? tracks[activeIdx] : null;
+  const renderTrackList = (trackList, sectionTitle, sectionTag) => (
+    <div className="mb-24 relative z-10 w-full">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-white/10 pb-6 gap-4">
+        <div>
+          <p className="font-heading uppercase tracking-[0.4em] text-[10px] text-[#888888] mb-3 flex items-center gap-3">
+            <span className="w-8 h-[1px] bg-[#888888]" />
+            {sectionTag}
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-light tracking-wide text-white">
+            {sectionTitle}
+          </h2>
+        </div>
+        <span className="font-heading text-[10px] tracking-[0.3em] uppercase text-[#888888]">
+          {trackList.length} Tracks
+        </span>
+      </div>
+
+      <div className="flex flex-col">
+        {trackList.map((t, idx) => {
+          const isActive = activeTrack?.id === t.id;
+          return (
+            <div
+              key={t.id}
+              className={`group flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-white/[0.05] transition-all cursor-pointer ${isActive ? 'bg-white/[0.04] px-6 -mx-6 rounded-2xl border-transparent backdrop-blur-sm' : 'hover:bg-white/[0.02] hover:px-4 hover:-mx-4 hover:rounded-xl hover:border-transparent'}`}
+              onClick={() => playFull(t)}
+              onMouseEnter={() => { setHoveredTrackId(t.id); playPreview(t); }}
+              onMouseLeave={() => { setHoveredTrackId(null); stopPreview(); }}
+            >
+              <div className="flex items-center gap-5 md:gap-8 min-w-0">
+                <span className="font-heading text-xs md:text-sm text-white/20 w-6 tabular-nums font-light">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+
+                <button
+                  className={`w-12 h-12 md:w-14 md:h-14 shrink-0 flex items-center justify-center rounded-full border transition-all duration-300 ${isActive && isPlaying ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'border-white/15 text-white group-hover:border-white group-hover:scale-105 group-hover:bg-white group-hover:text-black'}`}
+                  onClick={(e) => { e.stopPropagation(); playFull(t); }}
+                  aria-label={isActive && isPlaying ? "Pause" : "Play"}
+                >
+                  {isActive && isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-1" />}
+                </button>
+
+                <div className="min-w-0 pr-4">
+                  <h3 className={`font-display text-xl md:text-2xl font-light tracking-wide transition-colors truncate ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'}`}>
+                    {t.title}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2 mt-2">
+                    {t.tags.map(tag => (
+                      <span key={tag} className="font-heading text-[9px] tracking-widest uppercase text-white/30 group-hover:text-white/50 transition-colors">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className={`hidden lg:flex flex-1 justify-center items-center transition-all duration-500 ${hoveredTrackId === t.id || (isActive && hoveredTrackId === null) ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="flex items-center gap-[3px] h-6">
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.2s ease-in-out infinite 0.0s' }} />
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 0.9s ease-in-out infinite 0.1s' }} />
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.3s ease-in-out infinite 0.2s' }} />
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 0.8s ease-in-out infinite 0.3s' }} />
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.1s ease-in-out infinite 0.4s' }} />
+                  <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.4s ease-in-out infinite 0.5s' }} />
+                </div>
+              </div>
+
+              {/* Streaming Platforms Icons */}
+              <div 
+                className="flex items-center gap-4 mt-4 md:mt-0 pl-[112px] md:pl-0 z-20 transition-all duration-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t.spotify && (
+                  <a
+                    href={t.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/50 hover:text-[#1DB954] transition-all duration-300 hover:scale-110"
+                    title="Listen on Spotify"
+                  >
+                    <SpotifyIcon size={20} />
+                  </a>
+                )}
+                {t.itunes && (
+                  <a
+                    href={t.itunes}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/50 hover:text-[#FC3C44] transition-all duration-300 hover:scale-110"
+                    title="Listen on iTunes"
+                  >
+                    <ITunesIcon size={20} />
+                  </a>
+                )}
+                {t.youtube && (
+                  <a
+                    href={t.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/50 hover:text-[#FF0000] transition-all duration-300 hover:scale-110"
+                    title="Watch on YouTube"
+                  >
+                    <YoutubeIcon size={20} />
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#020202] text-white font-body relative pb-32 selection:bg-white/20">
@@ -159,6 +305,7 @@ export default function ComposerPage() {
           50% { height: 24px; }
         }
       `}</style>
+      
       {/* ── Metallic Silver Environmental Lighting & Texture ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute -top-32 -right-32 w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,_rgba(200,210,225,0.06),_transparent_60%)]" />
@@ -171,138 +318,109 @@ export default function ComposerPage() {
         <Nav />
 
         {/* Hero Section */}
-        <div className="relative pt-48 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto border-b border-white/10">
+        <div className="relative pt-40 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto border-b border-white/10 mb-16">
+          <div className="relative z-10 text-center flex flex-col items-center">
+            <p className="font-heading uppercase tracking-[0.4em] text-xs text-[#888888] mb-6 flex items-center justify-center gap-4">
+              <span className="w-8 h-[1px] bg-[#888888]" />
+              {composerInfo.role}
+              <span className="w-8 h-[1px] bg-[#888888]" />
+            </p>
 
-        <div className="relative z-10">
-          <p className="font-heading uppercase tracking-[0.4em] text-xs text-[#888888] mb-6 flex items-center gap-4">
-            <span className="w-12 h-[1px] bg-[#888888]" />
-            {composerInfo.role}
-          </p>
+            <h1 className="font-display font-light text-5xl md:text-7xl lg:text-8xl tracking-tight text-white leading-tight">
+              {composerInfo.name}
+            </h1>
 
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-tight">
-            {composerInfo.name}
-          </h1>
-
-          <p className="mt-8 max-w-2xl text-lg md:text-xl font-light text-[#cccccc] leading-relaxed">
-            {composerInfo.bio}
-          </p>
-        </div>
-      </div>
-
-      {/* Track List Section */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16">
-        <div className="flex items-end justify-between mb-12">
-          <h2 className="font-display text-3xl font-light tracking-wide text-white">Selected Works</h2>
-          <span className="font-heading text-xs tracking-[0.3em] uppercase text-[#888888]">{tracks.length} Compositions</span>
-        </div>
-
-        <div className="flex flex-col border-t border-white/10">
-          {tracks.map((t, idx) => {
-            const isActive = activeIdx === idx;
-            return (
-              <div
-                key={t.id}
-                className={`group flex items-center justify-between py-8 border-b border-white/10 transition-all cursor-pointer ${isActive ? 'bg-white/[0.03] px-6 -mx-6 rounded-2xl border-transparent' : 'hover:bg-white/[0.02] hover:px-4 hover:-mx-4 hover:rounded-xl hover:border-transparent'}`}
-                onClick={() => playFull(t, idx)}
-                onMouseEnter={() => { setHoveredIdx(idx); playPreview(t, idx); }}
-                onMouseLeave={() => { setHoveredIdx(null); stopPreview(); }}
-              >
-                <div className="flex items-center gap-6 md:gap-10">
-                  <span className="font-heading text-sm text-white/30 w-8 tabular-nums">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-
-                  <button
-                    className={`w-14 h-14 shrink-0 flex items-center justify-center rounded-full border transition-all duration-300 ${isActive && isPlaying ? 'bg-white text-black border-white scale-105' : 'border-white/20 text-white group-hover:border-white group-hover:scale-105 group-hover:bg-white group-hover:text-black'}`}
-                    onClick={(e) => { e.stopPropagation(); playFull(t, idx); }}
-                  >
-                    {isActive && isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}
-                  </button>
-
-                  <div>
-                    <h3 className={`font-display text-2xl md:text-3xl font-light tracking-wide transition-colors ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
-                      {t.title}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-3 mt-3">
-                      {(Array.isArray(t.tags) ? t.tags : String(t.tags).split(',').map(s => s.trim())).map(tag => (
-                        <span key={tag} className="font-heading text-[10px] tracking-widest uppercase text-[#888888]">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`hidden lg:flex flex-1 justify-center items-center transition-all duration-500 ${hoveredIdx === idx || (isActive && hoveredIdx === null) ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="flex items-center gap-[3px] h-6">
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.2s ease-in-out infinite 0.0s' }} />
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 0.9s ease-in-out infinite 0.1s' }} />
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.3s ease-in-out infinite 0.2s' }} />
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 0.8s ease-in-out infinite 0.3s' }} />
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.1s ease-in-out infinite 0.4s' }} />
-                    <div className="w-[2px] bg-white/60 rounded-full" style={{ animation: 'wave 1.4s ease-in-out infinite 0.5s' }} />
-                  </div>
-                </div>
-
-                <div className="hidden lg:block max-w-sm text-right">
-                  <p className="font-body text-sm text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">
-                    {t.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Minimal Sticky Audio Player */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-[#020202]/90 backdrop-blur-2xl border-t border-white/10 transition-transform duration-700 ease-in-out z-50 ${activeTrack ? 'translate-y-0' : 'translate-y-full'}`}>
-
-        {/* Progress bar line at top of player */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/10">
-          <div
-            className="h-full bg-white transition-all duration-100 ease-linear"
-            style={{ width: `${(currentTime / (duration || 100)) * 100}%` }}
-          />
-        </div>
-
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-24 flex items-center justify-between gap-6">
-
-          <div className="flex items-center gap-6 flex-1 min-w-0">
-            {activeTrack && (
-              <>
-                <div className="w-12 h-12 shrink-0 border border-white/10 flex items-center justify-center rounded-full">
-                  <Disc className={isPlaying ? 'animate-spin-slow text-white' : 'text-[#888888]'} size={20} />
-                </div>
-                <div className="min-w-0 truncate">
-                  <h4 className="font-display text-lg tracking-wide text-white truncate">{activeTrack.title}</h4>
-                  <span className="font-heading text-[10px] tracking-widest uppercase text-[#888888]">{composerInfo.name}</span>
-                </div>
-              </>
-            )}
+            <p className="mt-8 max-w-2xl text-lg md:text-xl font-light text-[#cccccc] leading-relaxed">
+              {composerInfo.bio}
+            </p>
           </div>
+        </div>
 
-          <div className="flex items-center justify-center">
-            <button
-              onClick={() => {
-                if (isPlaying) stopAudio();
-                else if (activeTrack) playFull(activeTrack, activeIdx);
+        {/* Track Lists Sections (2 Columns) */}
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 pb-20 grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {renderTrackList(ORIGINAL_SONGS, "Original Songs", "EKOPIX Originals")}
+          {renderTrackList(COVER_SONGS, "Cover Songs", "Reimagined Classics")}
+        </div>
+
+        {/* Minimal Sticky Audio Player */}
+        <div className={`fixed bottom-0 left-0 right-0 bg-[#020202]/90 backdrop-blur-2xl border-t border-white/10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-[999] ${activeTrack ? 'translate-y-0' : 'translate-y-full'}`}>
+          {/* Progress bar */}
+          <div className="absolute top-0 left-0 right-0 h-[4px] bg-white/10 group cursor-pointer -mt-[2px]">
+            <input
+              type="range"
+              min={0}
+              max={duration || 100}
+              value={currentTime}
+              onChange={(e) => {
+                const time = parseFloat(e.target.value);
+                setCurrentTime(time);
+                if (audioRef.current) {
+                  audioRef.current.currentTime = time;
+                }
               }}
-              className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 hover:bg-[#e0e0e0] transition-all"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            />
+            <div
+              className="h-full bg-white transition-all duration-100 ease-linear relative"
+              style={{ width: `${(currentTime / (duration || 100)) * 100}%` }}
             >
-              {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}
-            </button>
-          </div>
-
-          <div className="hidden md:flex items-center gap-4 flex-1 justify-end">
-            <Volume2 size={18} className="text-[#888888]" />
-            <div className="w-32 h-[2px] bg-white/20 rounded-full overflow-hidden">
-              <div className="w-[70%] h-full bg-white" />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-[0_0_10px_white]" />
             </div>
           </div>
 
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 md:h-24 flex items-center justify-between gap-6">
+            <div className="flex items-center gap-4 md:gap-6 flex-1 min-w-0">
+              {activeTrack && (
+                <>
+                  <div className="w-10 h-10 md:w-12 md:h-12 shrink-0 border border-white/10 flex items-center justify-center rounded-full">
+                    <Disc className={isPlaying ? 'animate-spin-slow text-white' : 'text-[#888888]'} size={20} />
+                  </div>
+                  <div className="min-w-0 truncate">
+                    <h4 className="font-display font-light text-base md:text-lg tracking-wide text-white truncate">{activeTrack.title}</h4>
+                    <span className="font-heading text-[9px] tracking-widest uppercase text-[#888888]">{composerInfo.name}</span>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex items-center justify-center shrink-0">
+              <button
+                onClick={() => {
+                  if (isPlaying) stopAudio();
+                  else if (activeTrack) playFull(activeTrack);
+                }}
+                className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 hover:bg-[#e0e0e0] transition-all"
+                aria-label={isPlaying ? "Pause" : "Play"}
+              >
+                {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-1" />}
+              </button>
+            </div>
+
+            <div className="hidden md:flex items-center gap-4 flex-1 justify-end group">
+              <Volume2 size={16} className="text-[#888888]" />
+              <div className="w-24 h-[4px] bg-white/20 rounded-full relative cursor-pointer flex items-center">
+                <input
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  value={volume}
+                  onChange={(e) => {
+                    const vol = parseFloat(e.target.value);
+                    setVolume(vol);
+                    if (audioRef.current) {
+                      audioRef.current.volume = vol;
+                    }
+                  }}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                />
+                <div className="h-full bg-white rounded-full relative pointer-events-none" style={{ width: `${volume * 100}%` }}>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-[0_0_10px_white]" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

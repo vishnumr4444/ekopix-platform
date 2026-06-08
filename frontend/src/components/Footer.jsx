@@ -39,7 +39,7 @@ export default function Footer({ content = {}, visibility = { contact: true } })
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group" aria-label="EKOPIX home">
             <div className="relative w-24 h-24 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-              <Image src="/images/logo.png" alt="EKOPIX" fill className="object-contain" />
+              <Image src="/images/logo.png" alt="EKOPIX" fill sizes="96px" className="object-contain" />
             </div>
           </Link>
 
@@ -47,17 +47,7 @@ export default function Footer({ content = {}, visibility = { contact: true } })
             India&apos;s Anime Music Experience
           </p>
 
-          {/* Social */}
-          <div className="flex items-center gap-3">
-            <a href={CHANNEL_URL} target="_blank" rel="noopener noreferrer" data-testid="footer-youtube" aria-label="YouTube"
-              className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 transition-all">
-              <Youtube size={18} />
-            </a>
-            <a href="mailto:contact@ekopix.com" data-testid="footer-email" aria-label="Email"
-              className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/70 hover:text-white hover:border-white/50 transition-all">
-              <Mail size={16} />
-            </a>
-          </div>
+   
         </div>
 
         {/* Bottom bar */}

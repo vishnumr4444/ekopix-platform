@@ -446,12 +446,25 @@ app.get('/api/admin/stats', auth, async (req, res) => {
 app.use((req, res) => res.status(404).json({ message: 'Route not found.' }));
 
 // ─── Start ────────────────────────────────────────────────────
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`\n🚀 EKOPIX Backend  →  http://localhost:${PORT}`);
+const startServer = (port) => {
+  const server = app.listen(port, () => {
+    console.log(`\n🚀 EKOPIX Backend  →  http://localhost:${port}`);
     console.log(`🔐 Admin login     →  POST /api/admin/login`);
     console.log(`🎬 Videos API      →  GET  /api/videos`);
     console.log(`⚙️  Settings API    →  GET  /api/settings`);
     if (useInMemory) console.log(`\n⚠️  IN-MEMORY mode (set MONGO_URL in .env for persistence)\n`);
   });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`⚠️  Port ${port} is busy, trying ${port + 1}...`);
+      startServer(port + 1);
+    } else {
+      console.error(err);
+    }
+  });
+};
+
+connectDB().then(() => {
+  startServer(typeof PORT === 'string' ? parseInt(PORT, 10) : PORT);
 });

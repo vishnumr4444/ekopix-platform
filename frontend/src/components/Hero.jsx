@@ -53,6 +53,12 @@ export default function Hero({ content = {} }) {
           if (s > 0 && curr < s - 0.5) player.seekTo(s);
           else if (end > s && curr >= end) player.seekTo(s);
         }, 200);
+      } else if (e.data === window.YT?.PlayerState?.ENDED) {
+        clearInterval(checkInterval);
+        if (player?.seekTo) {
+          player.seekTo(heroSettings.startSeconds || 0);
+          player.playVideo();
+        }
       } else { clearInterval(checkInterval); }
     };
 
@@ -62,7 +68,7 @@ export default function Hero({ content = {} }) {
       if (!el) return;
       player = new window.YT.Player('hero-yt-player', {
         videoId: heroSettings.youtubeId,
-        playerVars: { autoplay:1,mute:1,controls:0,showinfo:0,rel:0,loop:1,playlist:heroSettings.youtubeId,start:heroSettings.startSeconds||0,end:heroSettings.endSeconds||undefined,modestbranding:1,iv_load_policy:3,playsinline:1,fs:0,autohide:1 },
+        playerVars: { autoplay:1,mute:1,controls:0,showinfo:0,rel:0,start:heroSettings.startSeconds||0,end:heroSettings.endSeconds||undefined,modestbranding:1,iv_load_policy:3,playsinline:1,fs:0,autohide:1 },
         events: {
           onReady: (e) => { e.target.mute(); if (heroSettings.startSeconds > 0) e.target.seekTo(heroSettings.startSeconds); e.target.playVideo(); },
           onStateChange: onStateChange,
@@ -97,14 +103,14 @@ export default function Hero({ content = {} }) {
   return (
     <section
       data-testid="hero-section"
-      className="relative h-screen w-full overflow-hidden flex flex-col"
+      className="relative min-h-[100svh] w-full overflow-hidden flex flex-col"
     >
       {/* ── Video background ─────────────────────────────── */}
       {isImage ? (
         <div className="absolute inset-0 z-0" style={{ backgroundImage: `url(${heroSettings.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
       ) : (
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          <div id="hero-yt-player" className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2" />
+          <div id="hero-yt-player" className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 scale-[1.15]" />
         </div>
       )}
 
@@ -142,6 +148,7 @@ export default function Hero({ content = {} }) {
             src="/images/logo.png" 
             alt="EKOPIX" 
             fill 
+            sizes="(max-width: 768px) 70vw, 500px"
             priority
             className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]" 
           />
