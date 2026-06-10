@@ -76,6 +76,13 @@ const COVER_SONGS = [
   { id: 'c4', title: "Silent Night", filename: "Cover/4_Silent night.mp3", start: 0, end: 15, desc: "EKOPIX Cover arrangement.", tags: ["Cover", "Christmas"], spotify: "https://open.spotify.com/track/6LnP5irqR7Cz1yFaEYTEWT?si=022255d26c8e4146", itunes: "https://music.apple.com/in/song/silent-night-holy-night/1865371383", youtube: "https://youtu.be/Mh1QY_MjVk4?si=Ue2PywTYLhxKi3YH" },
 ];
 
+const getYoutubeId = (url) => {
+  if (!url) return null;
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[7].length === 11) ? match[7] : null;
+};
+
 export default function ComposerPage() {
   const [activeTrack, setActiveTrack] = useState(null);
   const [hoveredTrackId, setHoveredTrackId] = useState(null);
@@ -92,11 +99,16 @@ export default function ComposerPage() {
   const intervalRef = useRef(null);
   const hoverAudioRef = useRef(null);
   const hoverIntervalRef = useRef(null);
+  const ytPlayerRef = useRef(null);
+  const [ytReady, setYtReady] = useState(false);
 
   const stopAudio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
+    }
+    if (ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === 'function') {
+      ytPlayerRef.current.pauseVideo();
     }
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -111,6 +123,9 @@ export default function ComposerPage() {
       hoverAudioRef.current.pause();
       hoverAudioRef.current = null;
     }
+    if (!isPlaying && ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === 'function') {
+      ytPlayerRef.current.pauseVideo();
+    }
     if (hoverIntervalRef.current) {
       clearInterval(hoverIntervalRef.current);
       hoverIntervalRef.current = null;
@@ -121,6 +136,41 @@ export default function ComposerPage() {
     if (isPlaying) return;
 
     stopPreview();
+
+    const hasValidFile = track.filename && typeof track.filename === 'string' && track.filename.trim() !== '' && track.filename !== 'undefined' && track.filename !== 'null' && !track.filename.includes('youtube.com') && !track.filename.includes('youtu.be');
+
+    const doYoutubeFallback = () => {
+      const ytId = getYoutubeId(track.youtube);
+      if (ytId && ytReady && ytPlayerRef.current) {
+        ytPlayerRef.current.loadVideoById({
+           videoId: ytId,
+           startSeconds: track.start || 0
+        });
+        ytPlayerRef.current.setVolume(40);
+        
+        hoverIntervalRef.current = setInterval(() => {
+          if (ytPlayerRef.current?.getCurrentTime) {
+            const curr = ytPlayerRef.current.getCurrentTime();
+            if (curr >= (track.end || (track.start || 0) + 15)) {
+              stopPreview();
+            }
+          }
+        }, 100);
+      } else {
+        const previewDuration = (track.end && track.start) ? (track.end - track.start) * 1000 : 15000;
+        const startTime = Date.now();
+        hoverIntervalRef.current = setInterval(() => {
+          if (Date.now() - startTime >= previewDuration) {
+            stopPreview();
+          }
+        }, 100);
+      }
+    };
+
+    if (!hasValidFile) {
+      doYoutubeFallback();
+      return;
+    }
 
     const audioPath = `/songs/${track.filename}`;
     const audio = new Audio(audioPath);
@@ -137,8 +187,11 @@ export default function ComposerPage() {
             stopPreview();
           }
         }, 100);
-      }).catch(() => {
-        // Silently ignore browser playback interruptions
+      }).catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.warn("Failed to play preview file:", err);
+        stopPreview();
+        doYoutubeFallback();
       });
     }
   };
@@ -151,6 +204,61 @@ export default function ComposerPage() {
 
     stopAudio();
     stopPreview();
+
+    const hasValidFile = track.filename && typeof track.filename === 'string' && track.filename.trim() !== '' && track.filename !== 'undefined' && track.filename !== 'null' && !track.filename.includes('youtube.com') && !track.filename.includes('youtu.be');
+
+    const doYoutubeFallback = () => {
+      const ytId = getYoutubeId(track.youtube);
+      if (ytId && ytReady && ytPlayerRef.current) {
+        setActiveTrack(track);
+        setIsPlaying(true);
+        setCurrentTime(0);
+
+        ytPlayerRef.current.loadVideoById({
+           videoId: ytId,
+           startSeconds: 0
+        });
+        ytPlayerRef.current.setVolume(volume * 100);
+
+        intervalRef.current = setInterval(() => {
+          if (ytPlayerRef.current?.getCurrentTime) {
+            const curr = ytPlayerRef.current.getCurrentTime();
+            const dur = ytPlayerRef.current.getDuration();
+            setCurrentTime(curr);
+            if (dur > 0) setDuration(dur);
+            if (dur > 0 && curr >= dur - 0.5) {
+              stopAudio();
+            }
+          }
+        }, 100);
+      } else {
+        setActiveTrack(track);
+        setIsPlaying(true);
+        setCurrentTime(0);
+        const mockDuration = track.end || 30;
+        setDuration(mockDuration);
+
+        let lastTick = Date.now();
+        intervalRef.current = setInterval(() => {
+          setCurrentTime((prev) => {
+            const now = Date.now();
+            const dt = (now - lastTick) / 1000;
+            lastTick = now;
+            const next = prev + dt;
+            if (next >= mockDuration) {
+              setTimeout(stopAudio, 0);
+              return mockDuration;
+            }
+            return next;
+          });
+        }, 100);
+      }
+    };
+
+    if (!hasValidFile) {
+      doYoutubeFallback();
+      return;
+    }
 
     const audioPath = `/songs/${track.filename}`;
     const audio = new Audio(audioPath);
@@ -176,9 +284,14 @@ export default function ComposerPage() {
             stopAudio();
           }
         }, 100);
-      }).catch(() => {
-        // Silently ignore browser playback interruptions
-        setIsPlaying(false);
+      }).catch((err) => {
+        if (err.name === 'AbortError') {
+          setIsPlaying(false);
+          return;
+        }
+        console.warn("Failed to play full file:", err);
+        stopAudio();
+        doYoutubeFallback();
       });
     }
   };
@@ -200,9 +313,46 @@ export default function ComposerPage() {
         setLoadingTracks(false);
       });
 
+    const initYT = () => {
+      if (!window.YT?.Player) return;
+      const el = document.getElementById('composer-yt-player');
+      if (!el) return;
+      ytPlayerRef.current = new window.YT.Player('composer-yt-player', {
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: { 
+          autoplay: 0, 
+          controls: 0, 
+          showinfo: 0, 
+          rel: 0, 
+          modestbranding: 1, 
+          playsinline: 1, 
+          fs: 0,
+          origin: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
+          widget_referrer: typeof window !== 'undefined' ? window.location.href : ''
+        },
+        events: {
+          onReady: () => setYtReady(true),
+        }
+      });
+    };
+
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+    }
+
+    let ytInterval;
+    if (window.YT?.Player) { initYT(); }
+    else {
+      ytInterval = setInterval(() => { if (window.YT?.Player) { clearInterval(ytInterval); initYT(); } }, 100);
+    }
+
     return () => {
       stopAudio();
       stopPreview();
+      if (ytInterval) clearInterval(ytInterval);
+      try { ytPlayerRef.current?.destroy(); } catch {}
     };
   }, []);
 
@@ -319,13 +469,18 @@ export default function ComposerPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white font-body relative pb-32 selection:bg-white/20">
+    <div suppressHydrationWarning className="min-h-screen bg-[#020202] text-white font-body relative pb-32 selection:bg-white/20">
       <style>{`
         @keyframes wave {
           0%, 100% { height: 6px; }
           50% { height: 24px; }
         }
       `}</style>
+
+      {/* Hidden YouTube Player for Audio Streaming */}
+      <div className="fixed top-[-9999px] left-[-9999px] w-[300px] h-[300px] pointer-events-none z-[-1]">
+        <div id="composer-yt-player" />
+      </div>
       
       {/* ── Metallic Silver Environmental Lighting & Texture ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -385,6 +540,8 @@ export default function ComposerPage() {
                 setCurrentTime(time);
                 if (audioRef.current) {
                   audioRef.current.currentTime = time;
+                } else if (ytPlayerRef.current && ytReady) {
+                  ytPlayerRef.current.seekTo(time, true);
                 }
               }}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
@@ -439,6 +596,8 @@ export default function ComposerPage() {
                     setVolume(vol);
                     if (audioRef.current) {
                       audioRef.current.volume = vol;
+                    } else if (ytPlayerRef.current && ytReady) {
+                      ytPlayerRef.current.setVolume(vol * 100);
                     }
                   }}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"

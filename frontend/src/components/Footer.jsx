@@ -24,8 +24,8 @@ export default function Footer({ content = {}, visibility = { contact: true } })
           <a href={`mailto:${content.contactEmail || "ekopixuniverse@gmail.com"}`} className="font-heading text-xs md:text-sm tracking-[0.25em] uppercase text-white/90 hover:text-white transition-colors flex items-center gap-4">
             <Mail size={16} /> {content.contactEmail || "ekopixuniverse@gmail.com"}
           </a>
-          <a href="tel:+911234567890" className="font-heading text-xs md:text-sm tracking-[0.25em] uppercase text-white/90 hover:text-white transition-colors flex items-center gap-4">
-            <Phone size={16} /> +91 12345 67890
+          <a href="tel:+917034499883" className="font-heading text-xs md:text-sm tracking-[0.25em] uppercase text-white/90 hover:text-white transition-colors flex items-center gap-4">
+            <Phone size={16} /> +91 7034499883
           </a>
         </div>
       </div>

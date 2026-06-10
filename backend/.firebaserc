@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "",
+    "staging": "ekopix-backend"
+  },
+  "targets": {},
+  "etags": {}
+}

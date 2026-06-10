@@ -131,7 +131,7 @@ export default function Hero({ content = {} }) {
         >
           <span className="w-2 h-2 rounded-full bg-white/70 animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
           <span className="font-heading uppercase tracking-[0.4em] text-[10px] text-white/90">
-            {content.heroPill || "India's First Anime Music Band"}
+            {content.heroPill || "India's First OG Anime Music Band"}
           </span>
         </div>
 

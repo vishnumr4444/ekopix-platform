@@ -4,6 +4,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
+const functions = require('firebase-functions');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -103,6 +104,10 @@ async function connectDB() {
   }
   try {
     mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      useInMemory = false;
+      return;
+    }
     await mongoose.connect(process.env.MONGO_URL);
     console.log('✅ MongoDB connected');
     useInMemory = false;
@@ -114,7 +119,7 @@ async function connectDB() {
       subtitle: String,
       order: { type: Number, default: 0 },
     });
-    VideoModel = mongoose.model('Video', videoSchema);
+    VideoModel = mongoose.models.Video || mongoose.model('Video', videoSchema);
 
     const trackSchema = new mongoose.Schema({
       id: { type: String, default: uuidv4 },
@@ -129,20 +134,20 @@ async function connectDB() {
       youtube: String,
       order: { type: Number, default: 0 },
     });
-    TrackModel = mongoose.model('Track', trackSchema);
+    TrackModel = mongoose.models.Track || mongoose.model('Track', trackSchema);
 
     const settingsSchema = new mongoose.Schema({
       key: { type: String, unique: true },
       value: mongoose.Schema.Types.Mixed,
     });
-    SettingsModel = mongoose.model('Settings', settingsSchema);
+    SettingsModel = mongoose.models.Settings || mongoose.model('Settings', settingsSchema);
 
     const statusSchema = new mongoose.Schema({
       id: { type: String, default: uuidv4 },
       client_name: String,
       timestamp: { type: Date, default: Date.now },
     });
-    StatusModel = mongoose.model('StatusCheck', statusSchema);
+    StatusModel = mongoose.models.StatusCheck || mongoose.model('StatusCheck', statusSchema);
 
     // Seed or sync default tracks in MongoDB
     const trackCount = await TrackModel.countDocuments();
@@ -483,6 +488,14 @@ const startServer = (port) => {
   });
 };
 
-connectDB().then(() => {
-  startServer(typeof PORT === 'string' ? parseInt(PORT, 10) : PORT);
-});
+// Check if running in a Firebase environment vs standalone
+if (!process.env.FUNCTION_NAME && !process.env.FIREBASE_CONFIG) {
+  connectDB().then(() => {
+    startServer(typeof PORT === 'string' ? parseInt(PORT, 10) : PORT);
+  });
+} else {
+  // We're in Firebase: Connect DB explicitly for cloud functions
+  connectDB();
+}
+
+exports.api = functions.https.onRequest(app);

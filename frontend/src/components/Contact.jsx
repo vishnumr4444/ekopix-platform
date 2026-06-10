@@ -32,14 +32,14 @@ export default function Contact({ content = {} }) {
           <ContactRow 
             icon={<Mail size={24} strokeWidth={1.5} />} 
             label="Direct Inquiries" 
-            value={content.contactEmail || "ekopixuniverse@gmail.com"} 
-            href={`mailto:${content.contactEmail || "ekopixuniverse@gmail.com"}`} 
+            value={content.contactEmail || "ekopixofficial@gmail.com"} 
+            href={`mailto:${content.contactEmail || "ekopixofficial@gmail.com"}`} 
           />
           <ContactRow 
             icon={<Phone size={24} strokeWidth={1.5} />} 
             label="Global Office" 
-            value="+91 12345 67890" 
-            href="tel:+911234567890" 
+            value="+91 7034499883" 
+            href="tel:+917034499883" 
           />
           <ContactRow 
             icon={<Youtube size={24} strokeWidth={1.5} />} 

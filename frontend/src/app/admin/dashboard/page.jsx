@@ -201,10 +201,9 @@ export default function AdminDashboard() {
             </h1>
             <p className="font-body text-xs text-[#9b9bb1] mt-0.5">{new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
-          <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 text-[#9b9bb1] hover:text-white hover:border-[#ffffff]/40 font-heading text-xs tracking-[0.2em] uppercase transition-all">
-            View Site ↗
-          </a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 text-[#9b9bb1] hover:text-white hover:border-[#ffffff]/40 font-heading text-xs tracking-[0.2em] uppercase transition-all">
+              View Site ↗
+            </a>
         </header>
 
         <div className="p-8 space-y-6">
@@ -233,10 +232,7 @@ export default function AdminDashboard() {
                   <Btn onClick={() => setTab('tracks')}><Plus size={14} />Add Composer Song</Btn>
                 </div>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] px-6 py-4 flex items-center gap-3">
-                <CheckCircle2 size={18} className="text-green-400" />
-                <div><p className="font-heading text-sm text-white">Backend API — Online</p><p className="font-body text-xs text-[#9b9bb1]">Node.js on :5000 · Next.js on :3000</p></div>
-              </div>
+
             </>
           )}
 

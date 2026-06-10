@@ -17,7 +17,7 @@ const characters = [
       'When the Yuganta event threatened to unravel Bhoomi, Neelavai was the first of the Tridiva to awaken. Her presence brings both overwhelming peace and the terrifying power of the deep abyss.'
     ]
   },
-  { name: 'Agharni', image: mainImage, locked: true },
+  { name: 'Agharni', image: '/images/Agharni.jpeg', locked: true },
   { name: 'Aranya', image: mainImage, locked: true },
   { name: 'Unknown', image: mainImage, locked: true },
   { name: 'Unknown', image: mainImage, locked: true },
@@ -186,8 +186,12 @@ export default function About() {
                         <div className="w-full h-full relative opacity-80 bg-white/[0.02] rounded-3xl border border-white/[0.03] overflow-hidden group hover:bg-white/[0.05] transition-colors">
                           <img 
                             src={char.image} 
-                            className="absolute inset-0 w-full h-full object-contain blur-2xl grayscale opacity-20 mix-blend-overlay" 
+                            className="absolute inset-0 w-full h-full object-contain blur-md opacity-50" 
                             alt="Locked" 
+                            style={{ 
+                              maskImage: 'radial-gradient(ellipse at center, black 70%, transparent 100%)', 
+                              WebkitMaskImage: 'radial-gradient(ellipse at center, black 70%, transparent 100%)' 
+                            }}
                           />
                           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                             <div className="w-14 h-14 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-md border border-white/10 group-hover:border-white/20 transition-all">
